@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oyoq Kiyim Do'koni</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+    header {
+      background-color: #111;
+      color: #fff;
+      padding: 25px 20px;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .container {
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .filters {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .filters select {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .product {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    }
+    .product img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .product-info {
+      padding: 20px;
+      text-align: center;
+    }
+    .product-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .product-info p {
+      font-size: 0.95rem;
+      color: #777;
+      margin-bottom: 10px;
+    }
+    .price {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #222;
+    }
+    .add-to-cart {
+      background-color: #28a745;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .add-to-cart:hover {
+      background-color: #218838;
+    }
+    #cart-count {
+      font-weight: 600;
+      color: #fff;
+      background-color: #ff4d4d;
+      border-radius: 50%;
+      padding: 5px 10px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>Oyoq Kiyim Do'koni</header>
+
+  <div class="container">
+    <div class="filters">
+      <select id="categoryFilter">
+        <option value="all">Barchasi</option>
+        <option value="nike">Nike</option>
+        <option value="adidas">Adidas</option>
+        <option value="puma">Puma</option>
+      </select>
+      <select id="priceFilter">
+        <option value="all">Barchasi</option>
+        <option value="low">100,000 - 300,000 so'm</option>
+        <option value="mid">300,000 - 500,000 so'm</option>
+        <option value="high">500,000 - 700,000 so'm</option>
+      </select>
+    </div>
+
+    <div class="products" id="productContainer">
+      <!-- Products will be dynamically added here -->
+    </div>
+  </div>
+
+  <div id="cart-count">0</div>
+
+  <script>
+    const products = [
+      {
+        name: 'Nike Air Max',
+        description: 'Yengil va qulay krossovkalar.',
+        price: 450000,
+        category: 'nike',
+        imageUrl: 'https://images.unsplash.com/photo-1600180758890-6c0f1d55bdbb'
+      },
+      {
+        name: 'Adidas Ultra Boost',
+        description: 'Sport va yurish uchun ideal tanlov.',
+        price: 520000,
+        category: 'adidas',
+        imageUrl: 'https://images.unsplash.com/photo-1595950653106-6f2c8e4b7b9d'
+      },
+      {
+        name: 'Puma Runner',
+        description: 'Stil va qulaylik birlashtirilgan model.',
+        price: 390000,
+        category: 'puma',
+        imageUrl: 'https://images.unsplash.com/photo-1589983846991-323be3ef48d3'
+      },
+      {
+        name: 'Nike Air Force',
+        description: 'Klassik dizayn va maksimal qulaylik.',
+        price: 500000,
+        category: 'nike',
+        imageUrl: 'https://images.unsplash.com/photo-1563231232-5e1f1b7f9bff'
+      }
+    ];
+
+    const cart = [];
+    const productContainer = document.getElementById('productContainer');
+    const cartCount = document.getElementById('cart-count');
+    
+    // Function to update product list based on filters
+    function updateProductList() {
+      const categoryFilter = document.getElementById('categoryFilter').value;
+      const priceFilter = document.getElementById('priceFilter').value;
+
+      const filteredProducts = products.filter(product => {
+        const matchCategory = categoryFilter === 'all' || product.category === categoryFilter;
+        const matchPrice = priceFilter === 'all' || 
+          (priceFilter === 'low' && product.price <= 300000) || 
+          (priceFilter === 'mid' && product.price > 300000 && product.price <= 500000) || 
+          (priceFilter === 'high' && product.price > 500000);
+        return matchCategory && matchPrice;
+      });
+
+      productContainer.innerHTML = '';
+      filteredProducts.forEach(product => {
+        const productElement = document.createElement('div');
+        productElement.classList.add('product');
+        
+        productElement.innerHTML = `
+          <img src="${product.imageUrl}" alt="${product.name}">
+          <div class="product-info">
+            <h3>${product.name}</h3>
+            <p>${product.description}</p>
+            <div class="price">${product.price.toLocaleString()} so'm</div>
+            <button class="add-to-cart" onclick="addToCart(${product.price})">Savatga qo'shish</button>
+          </div>
+        `;
+        
+        productContainer.appendChild(productElement);
+      });
+    }
+
+    // Function to add product to cart
+    function addToCart(price) {
+      cart.push(price);
+      cartCount.textContent = cart.length;
+    }
+
+    // Event listeners for filters
+    document.getElementById('categoryFilter').addEventListener('change', updateProductList);
+    document.getElementById('priceFilter').addEventListener('change', updateProductList);
+
+    // Initialize product list on page load
+    updateProductList();
+  </script>
+</body>
+</html>
