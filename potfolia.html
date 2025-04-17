@@ -2,83 +2,282 @@
 <html lang="uz">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap" rel="stylesheet">
-    <title>Portfolio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: white;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Underdog&display=swap" rel="stylesheet">
+  <title>Portfolio</title>
+  <link rel="icon" href="pythonlogo.jpg" type="image/png" />
 
-        header {
-            background-color: #333;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
+  <style>
+    /* Sahifa silliq chiqishi */
+    body {
+      animation: fadeIn 1s ease-in;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #f3f4f6, #e5e7eb);
+    }
 
-        section {
-            padding: 30px;
-        }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
 
-        .contact  {
-  border: 2px solid #ccc;
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 40px auto;
-  background-color: #fff;
-  transition: transform 0.3s ease;
-}
+      to {
+        opacity: 1;
+      }
+    }
 
-.contact:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-}
+    header {
+      background-color: #333;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
 
+    h2 {
+      font-family: 'Underdog', cursive;
+      font-size: 24px;
+      background: linear-gradient(45deg, #2563eb, #9333ea);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        h2 {
-            color: rgb(51, 51, 51);
-        }
+    a {
+      background-color: #2563eb;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+      margin: 5px 0;
+    }
 
-        .contact {
-            background-color: rgb(136, 35, 232) (67, 89, 122);
-            width: 700px;
-            height: 200px;
-            margin-top: 50px;
-            margin-bottom: 20px;
-            text-align: center;
+    a:hover {
+      background-color: #1e40af;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(37, 99, 235, 0.6);
+    }
 
+    .container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 40px 60px;
+      gap: 40px;
+    }
 
-        }
-    </style>
+    .box-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .contact,
+    .projects {
+      border: 2px solid #ccc;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+
+    .contact:hover,
+    .projects:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      text-align: center;
+    }
+
+    .image-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .image-wrapper img {
+      height: 270px;
+      width: 500px;
+      border-radius: 15px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .image-wrapper img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+    }
+
+    .overlay-text {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .rasm1 {
+      border-radius: 100% !important;
+    }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 10px 15px;
+      font-size: 18px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .scroll-top:hover {
+      background-color: #1e3a8a;
+      transform: scale(1.1);
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .image-wrapper img {
+        width: 90%;
+        height: auto;
+      }
+
+      .contact,
+      .projects {
+        max-width: 90%;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>Saidbekning Portfolisi</h1>
-        <p>Backend Dasturchi</p>
-        <p>Yosh: 15</p>
+  <header>
+    <h1>Saidbekning Portfolisi</h1>
+    <p>Backend Dasturchi</p>
+    <p>Yosh: 15</p>
+  </header>
 
+  <div class="container">
 
-    </header>
-
-    <section class="contact">
-        <h2>Bog'lanish mumkin bo'lgan malumotlar</h2>
-       <p><a href="https://saidbeksodiqov495@gmail.com" target="_blank">Gmail</a></p> 
+    <!-- Chapdagi boxlar -->
+    <div class="box-wrapper">
+      <section class="contact">
+        <h2>Bog'lanish mumkin bo'lgan ma'lumotlar</h2>
+        <p><a href="mailto:saidbeksodiqov495@gmail.com" target="_blank">Gmail</a></p>
+        <p><a href="https://www.instagram.com/saidbek.051/" target="_blank">Instagram</a></p>
         <p><a href="https://t.me/saidbeksodiqov" target="_blank">Telegram</a></p>
-        <a href="https://github.com/saidbek051" target="_blank">GitHub</a>
+        <p><a href="https://www.youtube.com/@python_devopover" target="_blank">YouTube</a></p>
+        <p><a href="https://github.com/saidbek051" target="_blank">GitHub</a></p>
         <p>Telefon raqam: 91 *** ** **</p>
+      </section>
 
-    </section>
+      <section class="projects">
+        <h2>Tuzgan Dasturlarim</h2>
+        <p><a href="https://github.com/saidbek051/dokon" target="_blank">Dokon loyihasi (GitHub)</a></p>
+        <p><a href="https://github.com/saidbek051/Futbol-dasturi/blob/main/1.py" target="_blank">Futbol dasturi</a></p>
+        <p><a href="https://github.com/saidbek051/kalkulator-oyini" target="_blank">Kalkulyator o‘yini</a></p>
+      </section>
+
+      <section class="projects">
+        <h2>Faol bo'lgan saytlarim</h2>
+        <p><a href="https://robocontest.uz/profile/said_bekk" target="_blank">RoboContest</a></p>
+        <p><a href="https://acmp.ru/" target="_blank">ACMP.ru</a></p>
+        <p><a href="https://leetcode.com/" target="_blank">LeetCode</a></p>
+      </section>
+    </div>
+
+    <!-- O‘ngdagi rasmlar -->
+    <div class="image-container">
+      <div class="image-wrapper">
+        <img class="rasm1" src="C:/Users/user/Pictures/photo_2025-04-14_14-52-12.jpg" alt="Portfolio Image 1" />
+        <div class="overlay-text">Men haqimda</div>
+      </div>
+
+      <div class="image-wrapper">
+        <img class="rasm2" src="C:/Users/user/Desktop/vscode/pythonlogo.jpg" alt="Portfolio Image 2" />
+        <div class="overlay-text">Python logosi</div>
+      </div>
+
+      <div class="image-wrapper">
+        <img src="C:/Users/user/Pictures/Screenshots/Screenshot 2025-04-16 202049.png" alt="Portfolio Image 3" />
+        <div class="overlay-text">Faoliyatdan lavha</div>
+      </div>
+
+      <h2><a href="https://robocontest.uz/profile/said_bekk" target="_blank">RoboContest profilim</a></h2>
+    </div>
+
+  </div>
+
+  <!-- Yuqoriga qaytish tugmasi -->
+  <button onclick="scrollToTop()" class="scroll-top">↑</button>
+
+  <script>
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+  <div style="margin-top: 50px; text-align: center;">
+    <h2>YouTube Videolarim</h2>
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/D9JK_8J-Gh0?si=6vBCuKvRFuJjacXK"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/xJCzyZxVzuw?si=d4kq3f7XiuEcL_ma"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/BznvmSb7NVw?si=I4BHDBkR4_TLSB5N"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <footer
+    style="margin-top: 60px; background-color: #1f2937; color: white; padding: 25px 0; text-align: center; font-family: 'Underdog', cursive;">
+    <p style="margin: 5px 0;">© 2025 Saidbek Sodiqov</p>
+    <p style="margin: 5px 0;">"Har bir bugungi harakat – ertangi natijaning garovi"</p>
+    <div style="margin-top: 10px;">
+      <a href="https://t.me/saidbeksodiqov" target="_blank" style="margin: 0 10px;">Telegram</a>
+      <a href="https://github.com/saidbek051" target="_blank" style="margin: 0 10px;">GitHub</a>
+      <a href="mailto:saidbeksodiqov495@gmail.com" style="margin: 0 10px;">Gmail</a>
+    </div>
+  </footer>
+
+
 </body>
+
 
 </html>
